@@ -1,0 +1,4 @@
+{
+    "port": 9090,
+    "whisper_model_type": "small"
+}
