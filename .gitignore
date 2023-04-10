@@ -1,0 +1,12 @@
+.web
+pynecone.db
+
+# ignore pycache
+__pycache__
+
+# ignore music files
+*.mp3
+
+# ignore the whisper pre-trained modelo
+
+pretrained_models/*
