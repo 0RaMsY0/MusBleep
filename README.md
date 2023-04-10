@@ -25,8 +25,15 @@ Musbleep requires the following to get started:
 * Pynecone
 * FastAPI
 * whisper-timestamped
+* Linux OS (Ubuntu, kali linux, arch...)
 
 you can run the setup script located at ```MusBleep/scripts/setup.py``` to automaticly download everything that you will need.
+
+```bash
+$ python MusBleep/scripts/setup.py setup
+```
+
+> **_Note_**: It may takes some time depending on your internet speed
 
 you may need to change some values in the API configue located at ```MusBleep/api/conf/api-conf.json```, currentlly the default configuration is:
 ```json
@@ -68,7 +75,7 @@ $ pc run
 
 After that you can navigate to ```http:/localhost:3000``` and you will see that MusBleep is running.
 
-<image src="assets/MusBleep_preview.png" alt="MusBleep preview" style="border-radius: 10px" />
+<image src="assets/MusBleep_preview.png" alt="MusBleep preview" style="border-radius: 10px;" />
 
 # Contributing
 We welcome contributions from the community! If you find a bug or want to suggest a new feature, please open an issue on this repository. If you want to contribute code, please fork the repository and submit a pull request. We'll review your code as soon as possible!
