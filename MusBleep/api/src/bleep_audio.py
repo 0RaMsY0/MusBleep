@@ -62,10 +62,10 @@ def bleep_vocals(music_path: str, output_path: str | None = "output") -> str:
     
     BLEEP_FILTERS.append(
         f"volume=enable='between(t,{PREVIOUS_FILTER_END},{LENGTH})':volume=0"
-    ) 
-    
-    FFMPEG_COMMAND = f"ffmpeg -hide_banner -i {music_path} -f lavfi -i \"sine=frequency=1000\" -filter_complex \"[0:a]volume=1,{','.join(BASE_FILTERS)}[0x];[1:a]volume=1,{','.join(BLEEP_FILTERS)}[1x];[0x][1x]amix=inputs=2:duration=first\" -c:a libmp3lame -q:a 4 -y {MUSIC_OUTPUT_PATH}"
-    CLEAN_UP = f"rm {music_path}"
+    )
+
+    FFMPEG_COMMAND = f"ffmpeg -hide_banner -i \"{music_path}\" -f lavfi -i \"sine=frequency=1000\" -filter_complex \"[0:a]volume=1,{','.join(BASE_FILTERS)}[0x];[1:a]volume=1,{','.join(BLEEP_FILTERS)}[1x];[0x][1x]amix=inputs=2:duration=first\" -c:a libmp3lame -q:a 4 -y \"{MUSIC_OUTPUT_PATH}\""
+    CLEAN_UP = f"rm \"{music_path}\""
 
     subprocess.run(FFMPEG_COMMAND, shell=True)
     subprocess.run(CLEAN_UP, shell=True)
