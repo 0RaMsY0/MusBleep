@@ -14,14 +14,15 @@ class MusBleepState(pc.State):
             Changes the mode
         """
         self.is_darkMode = not self.is_darkMode
-    
+
     # Loading animation
     is_upload_started: bool = False
-    
+
     # Ending message
     show_ending_message: bool = False
     ending_message: str = ""
     message_status: str = ""
+
     # Music Upload
     bleeped_music_url: str = ""
     music_name: str = "Nothing to show"  # default value
@@ -68,14 +69,16 @@ class MusBleepState(pc.State):
             self.is_faild_to_bleep_music_exception_raised = True
             self.ending_message = ERROR_MESSAGES[1]
         
-        elif RESPONCE.status_code == 200:
+        elif RESPONCE.status_code == 201:
             self.bleeped_music_url = f"{API_URL}{RESPONCE.json()['bleeped_music_path']}"
+            self.ending_message = SUCCESS_MESSAGES[0]
+
+        print(f"{RESPONCE.json() = }")
 
         self.is_upload_finish  = True
         self.show_ending_message = True
         self.is_upload_started = False
 
-        self.ending_message = SUCCESS_MESSAGES[0]
         self.message_status = MESSAGES_STATUS[self.ending_message]
 
     def update_upload_exception_state(self):
@@ -95,3 +98,10 @@ class MusBleepState(pc.State):
             Updates the `is_playing` value
         """
         self.is_playing = not self.is_playing
+
+    def redirect_to_download_music(self):
+        """
+            Redirects to the download music music
+            in order to install it
+        """
+        return pc.redirect(MusBleepState.bleeped_music_url)
