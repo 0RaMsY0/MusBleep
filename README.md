@@ -11,7 +11,7 @@
 
 # Getting started
 
-MusBleep is a self-hosted project that makes it easy to censor explicit content in music tracks. Our application is designed for everyone who wants to enjoy there favorite music without being exposed to explicit content.
+MusBleep is a self-hosted application that makes it easy to censor explicit content in music tracks. Our application is designed for everyone who wants to enjoy their favorite music without being exposed to explicit content. The application relies on [Whisper](https://github.com/linto-ai/whisper-timestamped) to analyze the audio, and [FastAPI](https://github.com/tiangolo/fastapi) to provide a RESTful API for communication between the front-end and back-end. MusBleep also offers different types of Whisper models for users to choose from depending on their computational resources.
 
 To get started with MusBleep, you'll need to install it on your own server or local machine. Our application relies on [Pynecone](https://github.com/pynecone-io/pynecone), [Whisper](https://github.com/linto-ai/whisper-timestamped), and [FastAPI](https://github.com/tiangolo/fastapi), so make sure you have those installed before you begin.
 
@@ -21,11 +21,11 @@ We've included detailed instructions on how to install and use our application i
 
 Musbleep requires the following to get started:
 
-* python3.10+
-* Pynecone
-* FastAPI
-* whisper-timestamped
-* Linux OS (Ubuntu, kali linux, arch...)
+* Python 3.10+ - programming language used to build the application
+* Pynecone - library used for audio processing
+* FastAPI - web framework used to build the API
+* whisper-timestamped - library used for timestamping audio files
+* Linux OS (Ubuntu, Kali Linux, Arch) - operating system required to run the application
 
 you can run the setup script located at ```MusBleep/scripts/setup.py``` to automaticly download everything that you will need.
 
@@ -53,7 +53,7 @@ here we manly going to focus on the ```whisper_model_type``` you can see all the
 | large   |	1550 M     |	 x        |	   ✓         |
 | large-v2|	1550 M     |	 x        |	   ✓         |
 
-> **_Note_**: Keep in mind that going for a large or large-v2 model will require a lot of ressources so we recommend to use small, or medium model, but of course if you have a machine that is capable of running those large models you can go for it.
+> **_Note_**: Keep in mind that opting for a large or large-v2 model will require a significant amount of resources. Therefore, we recommend using a small or medium model. However, if you have a machine capable of running those large models, you can go for it.
 
 # Usage
 
@@ -73,12 +73,13 @@ $ pc run
 
 > **_Note_**: You need to be in the root directory of the project before executing this command
 
-After that you can navigate to ```http:/localhost:3000``` and you will see that MusBleep is running.
+After running the API and the front-end, you can navigate to [```http:/localhost:3000```](http:/localhost:3000) to use MusBleep.
 
 <image src="assets/MusBleep_preview.png" alt="MusBleep preview" style="border-radius: 10px;" />
 
 # Contributing
-We welcome contributions from the community! If you find a bug or want to suggest a new feature, please open an issue on this repository. If you want to contribute code, please fork the repository and submit a pull request. We'll review your code as soon as possible!
+
+We welcome contributions from the community! If you find a bug or want to suggest a new feature, please open an issue on this repository to discuss it with the team. When contributing code, please make sure to follow the coding standards and testing procedures outlined in the repository. To submit your changes, fork the repository and submit a pull request with a detailed description of the changes made. We'll review your code as soon as possible and merge it if it meets our quality standards.
 
 # License
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/0RaMsY0/MusBleep/blob/main/LICENSE) file for details.
