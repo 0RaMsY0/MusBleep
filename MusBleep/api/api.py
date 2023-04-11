@@ -22,7 +22,7 @@ def api_route():
         "message": "MusBleep API v1"
     }
 
-@API.post("/api/v1/bleep_music")
+@API.post("/api/v1/bleep_music", status_code=201)
 async def bleep(music_name: str, file: UploadFile = File(...)):
     """
         Bleeps the music that get uploaded
@@ -50,8 +50,8 @@ async def bleep(music_name: str, file: UploadFile = File(...)):
            file.file.close()
 
     # Bleeping the music
-    #MUSIC_OUTPUT_PATH = bleep_vocals(SAVE_MUSIC_PATH)
-    MUSIC_OUTPUT_PATH = f"{music_name}"
+    MUSIC_OUTPUT_PATH = bleep_vocals(SAVE_MUSIC_PATH)
+
     return {
         "status_code": 201,
         "message": f"`{music_name}` uploaded successfully",
