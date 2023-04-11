@@ -9,6 +9,7 @@ from gunicorn.glogging import Logger
 from loguru import logger
 
 from utils.logger import *
+from utils.check_dirs import check_dirs
 from utils.printl import printl
 from utils.read_conf import conf
 from utils.iter_file import iter_file
@@ -76,13 +77,16 @@ def get_bleeped_music(music_name: str):
     
     return StreamingResponse(iter_file(f"cache/{music_name}"), media_type="audio/mp3")
 
-if __name__ == '__main__':
+def run() -> None:
+    """
+        Initiates the API and utilizes personalized logs.
+    """
     INTERCEPT_HANDLER = InterceptHandler()
     # logging.basicConfig(handlers=[INTERCEPT_HANDLER], level=LOG_LEVEL)
     # logging.root.handlers = [INTERCEPT_HANDLER]
     logging.root.setLevel(LOG_LEVEL)
     logger.add("logs/api.log", rotation="10 MB")
-    
+
     CONF = conf()
     SEEN = set()
     for name in [
@@ -110,3 +114,10 @@ if __name__ == '__main__':
     }
 
     StandaloneApplication(API, OPTIONS).run()
+
+
+if __name__ == '__main__':
+    # Checking for needed dirs
+    check_dirs()
+
+    run()
