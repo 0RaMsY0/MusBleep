@@ -4,8 +4,13 @@ import time
 import typer
 from fastapi.responses import StreamingResponse
 from fastapi import FastAPI, File, UploadFile, HTTPException
+from gunicorn.app.base import BaseApplication
+from gunicorn.glogging import Logger
+from loguru import logger
 
+from utils.logger import *
 from utils.printl import printl
+from utils.read_conf import conf
 from utils.iter_file import iter_file
 from src.extract_vocals import extract_vocals
 from src.bleep_audio import bleep_vocals
@@ -70,3 +75,38 @@ def get_bleeped_music(music_name: str):
         )
     
     return StreamingResponse(iter_file(f"cache/{music_name}"), media_type="audio/mp3")
+
+if __name__ == '__main__':
+    INTERCEPT_HANDLER = InterceptHandler()
+    # logging.basicConfig(handlers=[INTERCEPT_HANDLER], level=LOG_LEVEL)
+    # logging.root.handlers = [INTERCEPT_HANDLER]
+    logging.root.setLevel(LOG_LEVEL)
+    logger.add("logs/api.log", rotation="10 MB")
+    
+    CONF = conf()
+    SEEN = set()
+    for name in [
+        *logging.root.manager.loggerDict.keys(),
+        "gunicorn",
+        "gunicorn.access",
+        "gunicorn.error",
+        "uvicorn",
+        "uvicorn.access",
+        "uvicorn.error",
+    ]:
+        if name not in SEEN:
+            SEEN.add(name.split(".")[0])
+            logging.getLogger(name).handlers = [INTERCEPT_HANDLER]
+
+    logger.configure(handlers=[{"sink": sys.stdout, "serialize": JSON_LOGS}])
+
+    OPTIONS = {
+        "bind": f"0.0.0.0:{CONF['port']}",
+        "workers": WORKERS,
+        "accesslog": "-",
+        "errorlog": "-",
+        "worker_class": "uvicorn.workers.UvicornWorker",
+        "logger_class": StubbedGunicornLogger
+    }
+
+    StandaloneApplication(API, OPTIONS).run()
