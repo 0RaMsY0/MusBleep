@@ -13,14 +13,14 @@ LIGHT_MODE = "#fafafa"
 
 # Ending messages
 ERROR_MESSAGES = [
-    "Faild to upload the music, please try again later",
+    "Faild to upload the music file, please try again later",
     "Faild to bleep the music file, please try again later"
 ]
 SUCCESS_MESSAGES = [
     "Successfully uploaded, and bleeped the music"
 ]
 MESSAGES_STATUS = {
-    "Faild to upload the music, please try again later": "error",
+    "Faild to upload the music file, please try again later": "error",
     "Faild to bleep the music file, please try again later": "error",
     "Successfully uploaded, and bleeped the music": "success",
 }
