@@ -44,14 +44,14 @@ you may need to change some values in the API configue located at ```MusBleep/ap
 ```
 here we manly going to focus on the ```whisper_model_type``` you can see all the diffrent types of the whisper model in the following table:
 
-|   Size  | parameters | English-only | Multilingual |
-| ------- | ---------- | ------------ | ------------ |
-| tiny    |	39 M       |	 ✓        |	   ✓         |
-| base	  | 74 M       |	 ✓        |	   ✓        |
-| small	  | 244 M      |	 ✓        |	   ✓        |
-| medium  |	769 M	   |     ✓        |	   ✓        |
-| large   |	1550 M     |	 x        |	   ✓         |
-| large-v2|	1550 M     |	 x        |	   ✓         |
+|   Size  | parameters | English-only | Multilingual | Required VRAM |
+| ------- | ---------- | ------------ | ------------ | ------------- |
+| tiny    |	39 M       |	 ✓        |	   ✓        |      ~1 GB    |
+| base	  | 74 M       |	 ✓        |	   ✓        |      ~1 GB    |
+| small	  | 244 M      |	 ✓        |	   ✓        |      ~2 GB    |
+| medium  |	769 M	   |     ✓        |	   ✓        |      ~5 GB    |
+| large   |	1550 M     |	 x        |	   ✓         |     ~10 GB   |
+| large-v2|	1550 M     |	 x        |	   ✓         |     ~10 GB   |
 
 > **_Note_**: Keep in mind that opting for a large or large-v2 model will require a significant amount of resources. Therefore, we recommend using a small or medium model. However, if you have a machine capable of running those large models, you can go for it.
 
