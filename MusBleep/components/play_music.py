@@ -17,7 +17,7 @@ def playMusic() -> pc.Component:
                 ),
                 height="4em",
                 bg="#FFFFFF",
-                is_disabled=not MusBleepState.is_upload_finish
+                is_disabled= True if MusBleepState.is_upload_finish == False else False
             ),
             pc.cond(
                 MusBleepState.music_name != "Nothing to show",
@@ -43,7 +43,8 @@ def playMusic() -> pc.Component:
                 ),
                 height="4em",
                 bg="#FFFFFF",
-                is_disabled=not MusBleepState.is_upload_finish
+                is_disabled=True if MusBleepState.is_upload_finish == False else False,
+                on_click=MusBleepState.redirect_to_download_music()
             )
         ),
         width="20m",
@@ -72,3 +73,4 @@ def playMusic() -> pc.Component:
             },
         }
     )
+
