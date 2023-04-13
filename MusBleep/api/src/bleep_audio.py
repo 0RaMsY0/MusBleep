@@ -2,6 +2,7 @@ import subprocess
 import whisper_timestamped as whisper
 
 from utils.printl import printl
+from utils.curse_words import curse_words
 
 def bleep_vocals(music_path: str, output_path: str | None = "output") -> str:
     """
@@ -18,22 +19,7 @@ def bleep_vocals(music_path: str, output_path: str | None = "output") -> str:
 
     # [NOTE]: This swear words were writen in the purpos of detecting them
     # in the vocals and bleeping them.
-    SWEAR_WORDS = [
-        "fuck",             "bitch",            "bitches"           "shit",
-        "damn",             "ass",              "pussy",            "nigga",
-        "whore",            "dick",             "cock",             "arse",
-        "arsehead",         "arsehole",         "ass",              "asshole",
-        "bastard",          "bloody",           "bollocks"          "brotherfucker",
-        "bugger",           "bullshit",         "cocksucker",       "crap",
-        "cunt",             "damn it",          "dickhead",         "dyke",
-        "fatherfucker",     "frigger",          "goddamn",          "godsdamn",
-        "hell",             "holy shit",        "horseshit",        "kike",
-        "motherfucker",     "nigra",            "piss",             "prick",
-        "shite",            "sisterfucker",     "slut",             "spastic",
-        "turd",             "fucking",          "hoe",              "f***ing"
-        "porn",             "pornhub",          "boobs",            "breasts",
-        "breast",           "tiddies",          "tiddy",            "striper"
-    ]
+    SWEAR_WORDS = curse_words()
     
     BASE_FILTERS = []
     BLEEP_FILTERS = []
