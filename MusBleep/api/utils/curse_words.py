@@ -14,14 +14,14 @@ def curse_words() -> list[str]:
     DECODED_CURSE_WORDS = []
 
     for word in CURSE_WORDS:
-        if isBase64(word):
-            DECODED_CURSE_WORDS.append(base64.b64decode(word))    
+        if is_base64(word):
+            DECODED_CURSE_WORDS.append(base64.b64decode(word).decode())
         else:
             logger.critical(f"'{word}' is not encoded in base64")
 
     return DECODED_CURSE_WORDS
 
-def isBase64(SB):
+def is_base64(SB) -> bool:
     """
         Checks if the given `SB` is encoded
         in bas64 or not
