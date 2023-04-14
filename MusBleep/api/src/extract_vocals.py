@@ -1,14 +1,13 @@
-import subprocess
-import demucs
+# import subprocess
 
-from utils.random_id import random_id
+# from utils.random_id import random_id
 
 #def extract_vocals(music_path: str) -> str:
-"""
-        Uses spleeter to separate vocals from
-        the beat then it returns that path to
-        the extracted vocals
-    """
+    # """
+    #     Uses spleeter to separate vocals from
+    #     the beat then it returns that path to
+    #     the extracted vocals
+    # """
 #    random_music_name = random_id()
 #    save_path = f"cache/{random_music_name}.mp3"
 #    command = ["python3", "-m", "spleeter", "separate", f"{music_path}", "-o", f"cache/{random_music_name}"]
@@ -23,19 +22,3 @@ from utils.random_id import random_id
 #    subprocess.run(clean_up, shell=False)
 #    
 #    return save_path
-
-def extract_vocals(music_path: str) -> str:
-    """
-        Uses demucs to separate vocals from
-        the beat then it returns that path to
-        the extracted vocals
-    """
-    MODEL = demucs.pretrained("demucs_quantized")
-    AUDIO = MODEL.separate(music_path, sources=["vocals"])
-    
-    RANDOM_MUSIC_ID = random_id()
-    SAVE_PATH = f"cache/{RANDOM_MUSIC_ID}.mp3"
-    
-    # demucs.io.save(AUDIO["vocals"], SAVE_PATH, sample_rate=44100)
-    AUDIO["vocals"].write(SAVE_PATH)
-    return SAVE_PATH
