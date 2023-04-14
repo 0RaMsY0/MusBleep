@@ -56,7 +56,7 @@ async def bleep(music_name: str, file: UploadFile = File(...)):
            file.file.close()
 
     # Bleeping the music
-    MUSIC_OUTPUT_PATH = bleep_vocals(SAVE_MUSIC_PATH)
+    MUSIC_OUTPUT_PATH = await bleep_vocals(SAVE_MUSIC_PATH)
 
     return {
         "status_code": 201,
@@ -75,7 +75,7 @@ def get_bleeped_music(music_name: str):
             detail=f"`{music_name}` not found"
         )
     
-    return StreamingResponse(iter_file(f"cache/{music_name}"), media_type="audio/mp3")
+    return StreamingResponse(iter_file(f"output/{music_name}"), media_type="audio/mp3")
 
 def run() -> None:
     """
@@ -107,6 +107,7 @@ def run() -> None:
     OPTIONS = {
         "bind": f"0.0.0.0:{CONF['port']}",
         "workers": WORKERS,
+        "timeout": 120*10,
         "accesslog": "-",
         "errorlog": "-",
         "worker_class": "uvicorn.workers.UvicornWorker",
@@ -119,5 +120,4 @@ def run() -> None:
 if __name__ == '__main__':
     # Checking for needed dirs
     check_dirs()
-
     run()
