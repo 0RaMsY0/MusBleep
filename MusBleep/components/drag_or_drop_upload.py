@@ -17,9 +17,10 @@ def dragOrDropUpload():
                 ),
                 pc.text(
                     "Drag and drop music file here or click to select a music file"
+                    
                 ),
             ),
-                border=f"1px dotted rgb(107,99,246)",
+                border="1px dotted rgb(107,99,246)",
                 padding="5em",
             ),
             pc.button(
