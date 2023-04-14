@@ -23,15 +23,7 @@ def index() -> pc.Component:
             height="4em"
         ),
         pc.cond(
-            MusBleepState.show_ending_message == False, 
-            pc.cond(MusBleepState.is_upload_started == False, 
-                dragOrDropUpload(),
-                pc.CircularProgress(
-                    color="lightblue",
-                    # track_color="white",
-                    is_indeterminate=True
-                )
-            ),
+            MusBleepState.show_ending_message,
             pc.box(
                 pc.alert(
                     pc.alert_icon(),
@@ -42,7 +34,13 @@ def index() -> pc.Component:
                 ),
                 width="17em"
             ),
-            
+            pc.cond(MusBleepState.is_upload_started,
+                pc.CircularProgress(
+                    color="black",
+                    is_indeterminate=True
+                ),
+                dragOrDropUpload(),
+            ),
         ),
     )
 

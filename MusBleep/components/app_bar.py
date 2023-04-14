@@ -25,32 +25,13 @@ def appBar():
                     href="/",
                     _hover={"text_decoration": "none"},    
                 ),
-                pc.hstack(
-                    pc.button(
-                        pc.cond(
-                            MusBleepState.is_darkMode != True,
-                            pc.image(
-                                src="/dark-mode.png",
-                                height="2em"
-                            ),
-                            pc.image(
-                                src="/light-mode.png",
-                                height="2em",
-                            ),
-                        ),
-                        on_click=MusBleepState.change_mode(),
-                        bg="#FFFFFF",
+                pc.link(
+                    pc.image(
+                        src="/github.png",
+                        height="2em"
                     ),
-                    pc.spacer(
-                        width="0.3em",
-                    ),
-                    pc.link(
-                        pc.image(
-                            src="/github.png",
-                            height="2em"
-                        ),
-                        href=GITHUB_REPO
-                    ),
+                    href=GITHUB_REPO,
+                    is_external=True
                 ),
                 justify="space-between",
                 padding_x="2em",

@@ -7,14 +7,6 @@ class MusBleepState(pc.State):
     """
         Main state handler for the web app
     """
-    is_darkMode = True
-
-    def change_mode(self):
-        """
-            Changes the mode
-        """
-        self.is_darkMode = not self.is_darkMode
-
     # Loading animation
     is_upload_started: bool = False
 
