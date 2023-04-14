@@ -4,12 +4,12 @@ import whisper_timestamped as whisper
 from utils.printl import printl
 from utils.curse_words import curse_words
 
-def bleep_vocals(music_path: str, output_path: str | None = "output") -> str:
+async def bleep_vocals(music_path: str, output_path: str | None = "output") -> str:
     """
-    Takes in the vocals path then uses
-    whisper to extract lyrics/text from
-    the vocals then try to find the 
-    explicit words to bleep.
+        Takes in the vocals path then uses
+        whisper to extract lyrics/text from
+        the vocals then try to find the 
+        explicit words to bleep.
     """
     AUDIO = whisper.load_audio(music_path)
     MODEL = whisper.load_model("small", device="cpu")
