@@ -9,7 +9,7 @@ except:
     subprocess.run(
         "pip install typer[all]",
         shell=True,
-        capture_output=False,
+        capture_output=True,
     )
 
 try:
@@ -18,7 +18,7 @@ except:
     subprocess.run(
         "pip install rich",
         shell=True,
-        capture_output=False,
+        capture_output=True,
     )
 
 import typer
