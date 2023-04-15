@@ -1,7 +1,6 @@
 import os
 import sys
 import time
-import typer
 from fastapi.responses import StreamingResponse
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from gunicorn.app.base import BaseApplication
@@ -13,7 +12,6 @@ from utils.check_dirs import check_dirs
 from utils.printl import printl
 from utils.read_conf import conf
 from utils.iter_file import iter_file
-from src.extract_vocals import extract_vocals
 from src.bleep_audio import bleep_vocals
 
 API = FastAPI()
