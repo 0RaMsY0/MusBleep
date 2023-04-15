@@ -2,6 +2,8 @@ import requests
 import pynecone as pc
 
 from MusBleep.vars import ERROR_MESSAGES, SUCCESS_MESSAGES, MESSAGES_STATUS
+from MusBleep.utils.check_api import check_api
+from MusBleep.utils.read_conf import conf
 
 class MusBleepState(pc.State):
     """
@@ -32,8 +34,17 @@ class MusBleepState(pc.State):
         """
         self.is_upload_started = True
 
-        API_URL = "http://127.0.0.1:9090"
+        if check_api() != True:
+            self.show_ending_message = True
+            self.ending_message = "Faild to connect to the api, please make sure it is running"
+            self.message_status = MESSAGES_STATUS[self.ending_message]
+            self.is_upload_finish = True
+            self.is_upload_started = False
 
+            return
+
+        API_URL = conf()["api"]
+        
         MUSIC_CONTENT = await file.read()
         MUSIC_NAME = file.filename
 

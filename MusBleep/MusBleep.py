@@ -25,14 +25,30 @@ def index() -> pc.Component:
         pc.cond(
             MusBleepState.show_ending_message,
             pc.box(
-                pc.alert(
-                    pc.alert_icon(),
-                    pc.alert_title(
-                        MusBleepState.ending_message,
+                pc.tablet_and_desktop(
+                    pc.box(
+                        pc.alert(
+                            pc.alert_icon(),
+                            pc.alert_title(
+                                MusBleepState.ending_message,
+                            ),
+                            status=MusBleepState.message_status,
+                        ),
+                        width="17em"
                     ),
-                    status=MusBleepState.message_status,
                 ),
-                width="17em"
+                pc.mobile_only(
+                    pc.box(
+                        pc.alert(
+                            pc.alert_icon(),
+                            pc.alert_title(
+                                MusBleepState.ending_message,
+                            ),
+                            status=MusBleepState.message_status,
+                        ),
+                        width="12em"
+                    ),
+                ),
             ),
             pc.cond(MusBleepState.is_upload_started,
                 pc.CircularProgress(
