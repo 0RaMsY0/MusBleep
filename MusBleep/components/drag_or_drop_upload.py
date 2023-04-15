@@ -7,21 +7,42 @@ def dragOrDropUpload():
         Drag or drop to upload form
     """
     return pc.vstack(
-        pc.upload(
-            pc.vstack(
-                pc.button(
-                    "Select File",
-                    color="rgb(107,99,246)",
-                    bg="white",
-                    border=f"1px solid rgb(107,99,246)",
+        pc.tablet_and_desktop(
+            pc.upload(
+                pc.vstack(
+                    pc.button(
+                        "Select File",
+                        color="rgb(107,99,246)",
+                        bg="white",
+                        border=f"1px solid rgb(107,99,246)",
+                    ),
+                    pc.text(
+                        "Drag and drop music file here or click to select a music file"
+                        
+                    ),
                 ),
-                pc.text(
-                    "Drag and drop music file here or click to select a music file"
-                    
+                    border="1px dotted rgb(107,99,246)",
+                    padding="5em",
                 ),
             ),
-                border="1px dotted rgb(107,99,246)",
-                padding="5em",
+            pc.mobile_only(
+                pc.upload(
+                    pc.vstack(
+                        pc.button(
+                            "Select File",
+                            color="rgb(107,99,246)",
+                            bg="white",
+                            border=f"1px solid rgb(107,99,246)",
+                        ),
+                        pc.text(
+                            "Drag and drop music file here or click to select a music file"
+                            
+                        ),
+                    ),
+                        border="1px dotted rgb(107,99,246)",
+                        padding="2em",
+                width="14em",
+                ),
             ),
             pc.button(
                 "Upload",
