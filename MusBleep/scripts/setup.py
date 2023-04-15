@@ -9,7 +9,6 @@ except:
     subprocess.run(
         "pip install typer[all]",
         shell=True,
-        capture_output=True,
     )
 
 try:
@@ -18,7 +17,6 @@ except:
     subprocess.run(
         "pip install rich",
         shell=True,
-        capture_output=True,
     )
 
 import typer
@@ -76,7 +74,7 @@ def install_node() -> None:
     NODESOURCE = "https://deb.nodesource.com/setup_19.x"
     COMMAND = f"curl -fsSL {NODESOURCE} | sudo bash -"
 
-    print(f"\t[green]↳ [cyan]{COMMAND}white")
+    print(f"\t[green]↳ [cyan]{COMMAND}[white]")
 
     subprocess.run(
         COMMAND, 
@@ -93,7 +91,7 @@ def install_ffmpeg() -> None:
     CONFIGURE_FFMPEG_COMMAND = "cd ~/ffmpeg && ./configure"
     INSTALL_FFMPEG = "cd ~/ffmpeg && make && make install"
 
-    print(f"\t[green]↳ [cyan]{COMMAND}white")
+    print(f"\t[green]↳ [cyan]{COMMAND}[white]")
     subprocess.run(
         COMMAND,
         shell=True,
@@ -101,7 +99,7 @@ def install_ffmpeg() -> None:
         stderr=subprocess.STDOUT
     )
 
-    print(f"\t[green]↳ [cyan]{CONFIGURE_FFMPEG_COMMAND}white")
+    print(f"\t[green]↳ [cyan]{CONFIGURE_FFMPEG_COMMAND}[white]")
     subprocess.run(
         CONFIGURE_FFMPEG_COMMAND,
         shell=True,
@@ -109,7 +107,7 @@ def install_ffmpeg() -> None:
         stderr=subprocess.STDOUT
     )
 
-    print(f"\t[green]↳ [cyan]{INSTALL_FFMPEG}white")
+    print(f"\t[green]↳ [cyan]{INSTALL_FFMPEG}[white]")
     subprocess.run(
         INSTALL_FFMPEG,
         shell=True,
