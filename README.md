@@ -17,7 +17,7 @@ To get started with MusBleep, you'll need to install it on your own server or lo
 
 We've included detailed instructions on how to install and use our application in the sections below. If you have any questions or need further assistance, please don't hesitate to reach out to our team. We're always happy to help!
 
-# Installation
+# Installation and configuration
 
 Musbleep requires the following to get started:
 
@@ -34,6 +34,8 @@ $ python MusBleep/scripts/setup.py setup
 ```
 
 > **_Note_**: It may takes some time depending on your internet speed
+
+* ## API configue 
 
 you may need to change some values in the API configue located at ```MusBleep/api/conf/api-conf.json```, currentlly the default configuration is:
 ```json
@@ -112,6 +114,52 @@ here we manly going to focus on the ```whisper_model_type``` you can see all the
 | large-v2|	1550 M     |	 x        |	   ✓         |     ~10 GB   |
 
 > **_Note_**: Keep in mind that opting for a large or large-v2 model will require a significant amount of resources. Therefore, we recommend using a small or medium model. However, if you have a machine capable of running those large models, you can go for it.
+
+if you want to add more words to ```"curse_words"``` list you will need to encrypt it in base64, you can use this script to do so:
+```python
+import base64
+
+word = "something explicit"
+word_to_bytes = bytes(word, "ascii")
+encoded_word = base64.b64encode(word_to_bytes)
+
+print(f"'{word}' = {encoded_word}")
+
+"""
+
+Output:
+'something explicit' = b'c29tZXRoaW5nIGV4cGxpY2l0'
+
+"""
+```
+> **_Note_**: No need to add the `b` before the encoded curse words to the configue, just add "c29tZXRoaW5nIGV4cGxpY2l0"
+
+it is important to use the ```ascii``` encoding type because the curse words reader will use it too.
+
+if you encounter the following error in the API logs:
+```bash
+2023-04-15 02:55:50.409 | CRITICAL | utils.curse_words:curse_words:20 - "hello" is not encoded in base64
+```
+then you need to go back to the configue and replace the curse word "hello" with it encoded one in base64.
+
+* ## MusBleep configue 
+
+You can also change the MusBleep configue file located at ```MusBleep/conf/MusBleep-conf.json``` to change the default port (3000) and the API url:
+
+```json
+{
+    "api": "http://localhost:9090",
+    "port": 3000
+}
+```
+
+in case the API isn't up when trying to upload a music to bleep, an error message will appear to the user.
+
+<div align="center">
+
+<img src="MusBleep/../assets/api_checker_error_message.png" />
+
+</div>
 
 # Usage
 
