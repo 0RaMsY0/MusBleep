@@ -17,7 +17,7 @@ def curse_words() -> list[str]:
         if is_base64(word):
             DECODED_CURSE_WORDS.append(base64.b64decode(word).decode())
         else:
-            logger.critical(f"'{word}' is not encoded in base64")
+            logger.critical(f"\"{word}\" is not encoded in base64")
 
     return DECODED_CURSE_WORDS
 
