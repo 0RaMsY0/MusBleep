@@ -24,7 +24,8 @@ Musbleep requires the following to get started:
 * Python 3.10+ - programming language used to build the application
 * Pynecone - library used for building the Front-End
 * FastAPI - web framework used to build the API
-* whisper-timestamped - library used for timestamping audio files
+* whisper-timestamped - library used for converting audio to text
+* ffmpeg - for audio manipulation
 * Linux OS (Ubuntu, Kali Linux, Arch) - operating system required to run the application
 
 you can run the setup script located at ```MusBleep/scripts/setup.py``` to automaticly download everything that you will need.
