@@ -41,12 +41,14 @@ def install_python_libs() -> None:
     for package in PYTHON_PACKAGES:
         COMMAND = f"pip install -U {package}"
 
-        print(f"\n[green] ==> [white]Downloading [yellow]`{package}`[white]")
+        print(f"[green] ==> [white]Downloading [yellow]`{package}`[white]")
         print(f"\t[green]↳ [cyan]{COMMAND}[white]")
 
         subprocess.run(
             COMMAND,
             shell=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.STDOUT
         )
 
 def install_bun() -> None:
@@ -59,7 +61,9 @@ def install_bun() -> None:
 
     subprocess.run(
         COMMAND,
-        shell=True
+        shell=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.STDOUT
     )
 
 def install_node() -> None:
@@ -77,6 +81,40 @@ def install_node() -> None:
     subprocess.run(
         COMMAND, 
         shell=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.STDOUT
+    )
+
+def install_ffmpeg() -> None:
+    """
+        Installs ffmpeg
+    """
+    COMMAND = "git clone https://git.ffmpeg.org/ffmpeg.git ~/ffmpeg"
+    CONFIGURE_FFMPEG_COMMAND = "cd ~/ffmpeg && ./configure"
+    INSTALL_FFMPEG = "cd ~/ffmpeg && make && make install"
+
+    print(f"\t[green]↳ [cyan]{COMMAND}white")
+    subprocess.run(
+        COMMAND,
+        shell=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.STDOUT
+    )
+
+    print(f"\t[green]↳ [cyan]{CONFIGURE_FFMPEG_COMMAND}white")
+    subprocess.run(
+        CONFIGURE_FFMPEG_COMMAND,
+        shell=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.STDOUT
+    )
+
+    print(f"\t[green]↳ [cyan]{INSTALL_FFMPEG}white")
+    subprocess.run(
+        INSTALL_FFMPEG,
+        shell=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.STDOUT
     )
 
 @CLI.command()
@@ -84,17 +122,21 @@ def setup() -> None:
     """
         Setup MusBleep
     """
-    print("\n[green] [  +  ] [white] Installing [blue]`Python Libs`[white]")
+    print("[green] [  +  ] [white] Installing [blue]`Python Libs`[white]")
     install_python_libs()
 
-    print("\n[green] [  +  ] [white] Installing [blue]`bun`[white]")
+    print("[green] [  +  ] [white] Installing [blue]`bun`[white]")
     install_bun()
 
     if platform.system() == "Windows":
-        print("\n[red] [  -  ] [white] Please visit [yellow]`https://nodejs.org/en` [white]to download [yellow]`NodeJS`")
+        print("[red] [  -  ] [white] Please visit [yellow]`https://nodejs.org/en` [white]to download [yellow]`NodeJS`")
         sys.exit(1)
     
+    print("[green] [  +  ] [white] Installing [blue]`node`[white]")
     install_node()
+
+    print("[green] [  +  ] [white] Installing [blue]`ffmpeg`[white]")
+    install_ffmpeg()
 
 def run() -> None:
     """
@@ -107,7 +149,7 @@ def run() -> None:
     ).stdout.strip().decode().replace("Python ", "").split(".")[0:2]
 
     if float(".".join(PYTHON_VERSION)) < 3.10:
-        print("\n[red] [  -  ] [white] Unsupported [blue]`python version`[white] please upgrade to [cyan]`3.10` [white] or higher")
+        print("[red] [  -  ] [white] Unsupported [blue]`python version`[white] please upgrade to [cyan]`3.10` [white] or higher")
         sys.exit(1)
 
     CLI()
