@@ -175,6 +175,7 @@ $ python api.py
 * Running the Front-end
 
 ```bash
+$ pc init
 $ pc run
 ```
 
