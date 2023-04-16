@@ -8,7 +8,7 @@ __pycache__
 *.mp3
 
 # ignore the whisper pre-trained modelo
-pretrained_models/*
+MusBleep/api/pretrained_models
 
 # Ignore logs
 *.log
