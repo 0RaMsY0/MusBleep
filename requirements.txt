@@ -1,4 +1,4 @@
 fastapi
 uvicorn
 pynecone
-whisper-timestamped @ git+https://github.com/linto-ai/whisper-timestamped
+git+https://github.com/linto-ai/whisper-timestamped
