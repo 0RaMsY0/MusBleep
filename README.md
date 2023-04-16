@@ -36,7 +36,25 @@ $ python MusBleep/scripts/setup.py setup
 
 > **_Note_**: It may takes some time depending on your internet speed
 
-* ## API configue 
+here are the commands that will be executed by the setup script:
+```bash
+# Installing python libs
+$ pip install fastapi
+$ pip install uvicorn
+$ pip install pynecone
+$ pip install git+https://github.com/linto-ai/whisper-timestamped
+
+# Installing bun
+$ curl -fsSL https://bun.sh/install | bash
+
+# Installing nodejs 
+$ curl -fsSL "https://deb.nodesource.com/setup_19.x" | sudo bash -
+
+# Installing ffmpeg
+$ git clone https://git.ffmpeg.org/ffmpeg.git ~/ffmpeg && cd ~/ffmpeg && ./configure && make && make install
+```
+
+* ## API configue
 
 you may need to change some values in the API configue located at ```MusBleep/api/conf/api-conf.json```, currentlly the default configuration is:
 ```json
