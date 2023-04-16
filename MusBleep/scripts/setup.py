@@ -141,7 +141,7 @@ def run() -> None:
         Runs the CLI
     """
     PYTHON_VERSION = subprocess.run(
-        "python --version",
+        "python3 --version",
         shell=True,
         capture_output=True
     ).stdout.strip().decode().replace("Python ", "").split(".")[0:2]
