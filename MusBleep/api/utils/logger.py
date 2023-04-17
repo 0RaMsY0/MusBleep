@@ -12,7 +12,6 @@ LOG_LEVEL = logging.getLevelName(os.environ.get("LOG_LEVEL", "DEBUG"))
 JSON_LOGS = True if os.environ.get("JSON_LOGS", "0") == "1" else False
 WORKERS = int(os.environ.get("GUNICORN_WORKERS", "5"))
 
-
 class InterceptHandler(logging.Handler):
     def emit(self, record):
         # Get corresponding Loguru level if it exists
@@ -59,5 +58,3 @@ class StandaloneApplication(BaseApplication):
 
     def load(self):
         return self.application
-
-
