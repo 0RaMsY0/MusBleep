@@ -63,10 +63,10 @@ def run() -> None:
     # logging.basicConfig(handlers=[INTERCEPT_HANDLER], level=LOG_LEVEL)
     # logging.root.handlers = [INTERCEPT_HANDLER]
     logging.root.setLevel(LOG_LEVEL)
-    logger.add("logs/api.log", rotation="10 MB")
 
     CONF = conf()
     SEEN = set()
+
     for name in [
         *logging.root.manager.loggerDict.keys(),
         "gunicorn",
@@ -81,7 +81,8 @@ def run() -> None:
             logging.getLogger(name).handlers = [INTERCEPT_HANDLER]
 
     logger.configure(handlers=[{"sink": sys.stdout, "serialize": JSON_LOGS}])
-
+    logger.add("logs/api.log", rotation="10 MB")
+    
     OPTIONS = {
         "bind": f"0.0.0.0:{CONF['port']}",
         "workers": WORKERS,
