@@ -1,4 +1,5 @@
 import subprocess
+from loguru import logger
 import whisper_timestamped as whisper
 
 from utils.printl import printl
@@ -20,13 +21,12 @@ async def bleep_vocals(music_path: str, output_path: str | None = "output") -> s
     # [NOTE]: This swear words were writen in the purpos of detecting them
     # in the vocals and bleeping them.
     SWEAR_WORDS = curse_words()
-    
+
     BASE_FILTERS = []
     BLEEP_FILTERS = []
 
     PREVIOUS_FILTER_END = 0
-    
-    printl("    [blue]↳ [white]Detecting swear words...", end=True)
+
     for segment in RESULT["segments"]:
         for word in segment["words"]:
             word_text = word["text"].lower().strip('.!?{}[]()+=_-@#$%^&*~`"|/')
@@ -52,8 +52,20 @@ async def bleep_vocals(music_path: str, output_path: str | None = "output") -> s
 
     FFMPEG_COMMAND = f"ffmpeg -hide_banner -i \"{music_path}\" -f lavfi -i \"sine=frequency=1000\" -filter_complex \"[0:a]volume=1,{','.join(BASE_FILTERS)}[0x];[1:a]volume=1,{','.join(BLEEP_FILTERS)}[1x];[0x][1x]amix=inputs=2:duration=first\" -c:a libmp3lame -q:a 4 -y \"{MUSIC_OUTPUT_PATH}\""
     CLEAN_UP = f"rm \"{music_path}\""
+    
+    logger.info(f"ffmpeg command: {FFMPEG_COMMAND}")
 
-    subprocess.run(FFMPEG_COMMAND, shell=True)
-    subprocess.run(CLEAN_UP, shell=True)
+    subprocess.run(
+        FFMPEG_COMMAND,
+        shell=True,
+        stderr=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL
+    )
+    subprocess.run(
+        CLEAN_UP,
+        shell=True,
+        stderr=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL
+    )
     
     return MUSIC_OUTPUT_PATH
