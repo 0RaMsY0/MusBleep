@@ -26,40 +26,20 @@ def api_route():
         "message": "MusBleep API v1"
     }
 
-@API.post("/api/v1/bleep_music", status_code=201)
-async def bleep(music_name: str, file: UploadFile = File(...)):
+@API.get("/api/v1/bleep_music", status_code=200)
+async def bleep(music_name: str):
     """
         Bleeps the music that get uploaded
     """
     ALLOWED_FILE_EXTENTIONS = ["mp3", "wav", "webm"]
-    SAVE_MUSIC_PATH = f"cache/{music_name if ' ' not in music_name else music_name.replace(' ', '_')}.mp3"
+    MUSIC_PATH = music_name
 
-    if music_name.split(".")[-1] not in ALLOWED_FILE_EXTENTIONS:
-        raise HTTPException(
-            status_code=400,
-            detail="Invalid file extention, the supported extentions are [`mp3`, `wav`, `webm`]"
-        )
-
-    try:
-           with open(SAVE_MUSIC_PATH, "wb") as save_music:
-               while music_content := file.file.read(1024 * 1024):
-                   save_music.write(music_content)
-    except Exception as exception:
-           print(exception)
-           raise HTTPException(
-                   status_code=409, 
-                    detail=f"Faild to upload `{music_name}`, exception raised: {exception}"
-                )
-    finally:
-           file.file.close()
-
-    # Bleeping the music
-    MUSIC_OUTPUT_PATH = await bleep_vocals(SAVE_MUSIC_PATH)
+    MUSIC_OUTPUT_PATH = await bleep_vocals(MUSIC_PATH)
 
     return {
         "status_code": 201,
         "message": f"`{music_name}` uploaded successfully",
-        "bleeped_music_path": f"/api/v1/get_music?music_name={SAVE_MUSIC_PATH.replace('cache/', '')}"
+        "bleeped_music_path": f"/api/v1/get_music?music_name={MUSIC_PATH.replace('cache/', '')}"
     }
 
 @API.get("/api/v1/get_music")
