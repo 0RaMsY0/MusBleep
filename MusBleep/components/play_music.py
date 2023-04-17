@@ -12,14 +12,26 @@ def playMusic() -> pc.Component:
     return pc.box(
         pc.tablet_and_desktop(
             pc.hstack(
-                pc.button(
-                    pc.image(
-                        src="/play-button.png",
-                        height="2.5em"
+                pc.cond(
+                    MusBleepState.is_upload_finish,
+                    pc.button(
+                        pc.image(
+                            src="/play-button.png",
+                            height="2.5em"
+                        ),
+                        height="4em",
+                        bg="#FFFFFF",
+                        is_disabled=False
                     ),
-                    height="4em",
-                    bg="#FFFFFF",
-                    is_disabled= True if MusBleepState.is_upload_finish == False else False
+                    pc.button(
+                        pc.image(
+                            src="/play-button.png",
+                            height="2.5em"
+                        ),
+                        height="4em",
+                        bg="#FFFFFF",
+                        is_disabled=True
+                    ),
                 ),
                 pc.cond(
                     MusBleepState.music_name != "Nothing to show",
@@ -38,16 +50,30 @@ def playMusic() -> pc.Component:
                 pc.spacer(
                     width="5em"
                 ),
-                pc.button(
-                    pc.image(
-                        src="/download.png",
-                        height="2.9em",
+                pc.cond(
+                    MusBleepState.is_upload_finish,
+                    pc.button(
+                        pc.image(
+                            src="/download.png",
+                            height="2.9em",
+                        ),
+                        height="4em",
+                        bg="#FFFFFF",
+                        is_disabled=False,
+                        on_click=MusBleepState.redirect_to_download_music()
                     ),
-                    height="4em",
-                    bg="#FFFFFF",
-                    is_disabled=True if MusBleepState.is_upload_finish == False else False,
-                    on_click=MusBleepState.redirect_to_download_music()
-                )
+                    pc.button(
+                        pc.image(
+                            src="/download.png",
+                            height="2.9em",
+                        ),
+                        height="4em",
+                        bg="#FFFFFF",
+                        is_disabled=True,
+                        on_click=MusBleepState.redirect_to_download_music()
+                    )
+                ),
+                
             ),
             width="20m",
             background_repeat="no-repeat",
@@ -103,11 +129,5 @@ def playMusic() -> pc.Component:
             margin_bottom="1.2em",
             style=PLAY_MUSIC_CARD_STYLE_MOBILE,
         ),
-        # width="20m",
-        # background_repeat="no-repeat",
-        # background_size="15em",
-        # background_position="135% 150%",
-        # margin_bottom="1.2em",
-        # style=PLAY_MUSIC_CARD_STYLE,
     )
 
