@@ -23,6 +23,9 @@ def dragOrDropUpload():
                 ),
                     border="1px dotted rgb(107,99,246)",
                     padding="5em",
+                    max_files=1,
+                    max_size= 5000000, # 5 mb
+                    multipule=False
                 ),
             ),
             pc.mobile_only(
