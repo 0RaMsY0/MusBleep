@@ -42,6 +42,7 @@ here are the commands that will be executed by the setup script:
 $ pip install fastapi
 $ pip install uvicorn
 $ pip install pynecone
+$ pip install rich
 $ pip install git+https://github.com/linto-ai/whisper-timestamped
 
 # Installing bun
