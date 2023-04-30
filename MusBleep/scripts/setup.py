@@ -33,6 +33,7 @@ def install_python_libs() -> None:
        "fastapi",
        "uvicorn",
        "pynecone",
+       "rich",
        "git+https://github.com/linto-ai/whisper-timestamped"
     ]
 
