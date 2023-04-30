@@ -1,6 +1,7 @@
 import subprocess
-from loguru import logger
 import whisper_timestamped as whisper
+
+from loguru import logger
 
 from utils.printl import printl
 from utils.curse_words import curse_words
@@ -16,7 +17,7 @@ async def bleep_vocals(music_path: str, output_path: str | None = "output") -> s
     MODEL = whisper.load_model("small", device="cpu")
     RESULT = whisper.transcribe(MODEL, AUDIO, language="en")
     
-    MUSIC_OUTPUT_PATH = f"output/{music_path.split('/')[-1]}"
+    MUSIC_OUTPUT_PATH = f"output/{music_path.split('/')[-1]}" if output_path == "output" else f"{output_path}/{music_path.split('/')[-1]}"
 
     # [NOTE]: This swear words were writen in the purpos of detecting them
     # in the vocals and bleeping them.
