@@ -4,6 +4,7 @@ import whisper_timestamped as whisper
 from loguru import logger
 
 from utils.printl import printl
+from utils.read_conf import conf
 from utils.curse_words import curse_words
 
 async def bleep_vocals(music_path: str, output_path: str | None = "output") -> str:
@@ -13,8 +14,10 @@ async def bleep_vocals(music_path: str, output_path: str | None = "output") -> s
         the vocals then try to find the 
         explicit words to bleep.
     """
+    API_CONFIGUE = conf()
+
     AUDIO = whisper.load_audio(music_path)
-    MODEL = whisper.load_model("small", device="cpu")
+    MODEL = whisper.load_model(API_CONFIGUE["whisper_model_type"], device="cpu")
     RESULT = whisper.transcribe(MODEL, AUDIO, language="en")
     
     MUSIC_OUTPUT_PATH = f"output/{music_path.split('/')[-1]}" if output_path == "output" else f"{output_path}/{music_path.split('/')[-1]}"
