@@ -12,3 +12,7 @@ MusBleep/api/pretrained_models
 
 # Ignore logs
 *.log
+
+# Ignore configue files
+MusBleep/api/conf/api-conf.json
+MusBleep/conf/MusBleep-conf.json
